@@ -23,8 +23,8 @@ def send_packets_from_queue(queue):
 
 def attack_HQ():
     processes = []
-    loops = 50  # Số lượng gói tin được gửi trong mỗi vòng lặp
-    num_processes = 50  # Số lượng tiến trình đồng thời
+    loops = 10  # Số lượng gói tin được gửi trong mỗi vòng lặp
+    num_processes = 10  # Số lượng tiến trình đồng thời
     queue = Queue()  # Khởi tạo queue 
 
     if method == "f":
