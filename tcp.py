@@ -1,6 +1,8 @@
+
 import random
 import threading
 import time
+from scapy.sendrecv import send
 from scapy.all import *
 from Crypto.Cipher import AES
 
@@ -25,10 +27,10 @@ def send_packet(payload):
     
     # Thêm các headers gây lỗi cho chương trình
     packet[TCP].options += [("Timestamp", (1, 1))]
-    packet[TCP].options += [("Unknown", b"\x00" * 8)]
+    packet[TCP].options += [("Unknown", b"\x00" * 10)]
     
     # Gửi packet
-    send(packet, verbose=False)
+    send(packet, verbose=False, error='ignore')
 
 # Tạo danh sách thread
 threads = []
